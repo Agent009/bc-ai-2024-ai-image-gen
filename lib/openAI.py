@@ -38,13 +38,15 @@ def generate_images(prompt: str, model=get_openai_model(), size="512x512", n=1) 
     for image in response.data:
         print(image.url)
         image_url = image.url
+        image_urls.append(image_url)
         # Download the image and save it to the "data" directory
         image_data = requests.get(image_url).content
 
-        with open(get_data_path() + f"generated_image_{image_urls.index(image_url)}.png", "wb") as f:
-            f.write(image_data)
-
-        image_urls.append(image_url)
+        try:
+            with open(get_data_path() + f"generated_image_{image_urls.index(image_url)}.png", "wb") as f:
+                f.write(image_data)
+        except Exception as e:
+            print(f"Error saving image: {e}")
 
     return image_urls
 
