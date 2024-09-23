@@ -33,6 +33,23 @@ def generate_images(prompt: str, model=get_openai_model(), size="512x512", n=1) 
         n=n,
     )
 
+    return handle_generated_images(response, prefix="generated_image_")
+
+
+def create_variations(image: str, model=get_openai_model(), size="1024x1024", n=1) -> list[str]:
+    client = get_openai_client()
+    response = client.images.create_variation(
+        model=model,
+        image=open(get_data_path() + image, "rb"),
+        size=size,
+        # The n parameter specifies the number of images to generate
+        n=n,
+    )
+
+    return handle_generated_images(response, prefix="image_variation_")
+
+
+def handle_generated_images(response, prefix="generated_image_"):
     image_urls = []
 
     for image in response.data:
@@ -43,7 +60,7 @@ def generate_images(prompt: str, model=get_openai_model(), size="512x512", n=1) 
         image_data = requests.get(image_url).content
 
         try:
-            with open(get_data_path() + f"generated_image_{image_urls.index(image_url)}.png", "wb") as f:
+            with open(get_data_path() + f"{prefix}{image_urls.index(image_url)}.png", "wb") as f:
                 f.write(image_data)
         except Exception as e:
             print(f"Error saving image: {e}")

@@ -1,7 +1,8 @@
-# CLIP demos using the Hugging Face Transformers library and Clip-As-Service
+# AI Image & Variation Generator
 
 ## Instructions / README
 * [Lesson-21 / Exercises / 01-Generate-Images-DALL-E](https://github.com/Encode-Club-AI-Bootcamp/Generative-AI-Applications/blob/main/Lesson-21/exercises/01-Generate-Images-DALL-E.md)
+* [Lesson-21 / Exercises / 02-Generate-Image-Variations](https://github.com/Encode-Club-AI-Bootcamp/Generative-AI-Applications/blob/main/Lesson-21/exercises/02-Generate-Image-Variations.md)
 
 ## Setup
 
