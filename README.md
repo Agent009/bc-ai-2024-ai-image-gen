@@ -1,4 +1,4 @@
-# AI Image & Variation Generator
+# AI Image Generation, Variation & Editing Facility
 
 ## Instructions / README
 * [Lesson-21 / Exercises / 01-Generate-Images-DALL-E](https://github.com/Encode-Club-AI-Bootcamp/Generative-AI-Applications/blob/main/Lesson-21/exercises/01-Generate-Images-DALL-E.md)
