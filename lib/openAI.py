@@ -3,7 +3,7 @@ from dotenv import load_dotenv, find_dotenv
 from openai import OpenAI
 import requests
 
-from lib.utils import get_data_path
+from lib.utils import get_data_path, get_generations_path
 
 # ---------- Load environment variables
 load_dotenv(find_dotenv())
@@ -49,6 +49,21 @@ def create_variations(image: str, model=get_openai_model(), size="1024x1024", n=
     return handle_generated_images(response, prefix="image_variation_")
 
 
+def edit_image(prompt: str, image: str, mask: str, model=get_openai_model(), size="512x512", n=1) -> list[str]:
+    client = get_openai_client()
+    response = client.images.edit(
+        model=model,
+        image=open(get_data_path() + image, "rb"),
+        mask=open(get_data_path() + mask, "rb"),
+        prompt=input(prompt),
+        size=size,
+        # The n parameter specifies the number of images to generate
+        n=n,
+    )
+
+    return handle_generated_images(response, prefix="edited_image_")
+
+
 def handle_generated_images(response, prefix="generated_image_"):
     image_urls = []
 
@@ -60,7 +75,7 @@ def handle_generated_images(response, prefix="generated_image_"):
         image_data = requests.get(image_url).content
 
         try:
-            with open(get_data_path() + f"{prefix}{image_urls.index(image_url)}.png", "wb") as f:
+            with open(get_generations_path() + f"{prefix}{image_urls.index(image_url)}.png", "wb") as f:
                 f.write(image_data)
         except Exception as e:
             print(f"Error saving image: {e}")

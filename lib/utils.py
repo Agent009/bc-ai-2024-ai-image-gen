@@ -5,6 +5,10 @@ def get_data_path():
     return "./data/"
 
 
+def get_generations_path():
+    return "./generated/"
+
+
 def multiline_input(prompt: str) -> str:
     """
     Captures multi-line user input. Input is terminated by pressing ENTER twice.

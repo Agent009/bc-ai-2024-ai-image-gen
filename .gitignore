@@ -8,4 +8,7 @@
 **/__pycache__/**
 
 # Temporary data files
+!data/.gitkeep
 data/
+!generated/.gitkeep
+generated/
